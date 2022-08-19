@@ -7,6 +7,8 @@ namespace SnakeGame_Console.SnakeGame.Types
 {
     class Apple
     {
+        public static char name = '2';
+
         public Position position { get; set; }
 
         public static Apple CreateWithRandomPosition()

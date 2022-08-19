@@ -8,6 +8,8 @@ namespace SnakeGame_Console.SnakeGame.Types
 {
     class SnakeTail : IMovable
     {
+        public static char name = '0';
+
         public Position position { get; set; }
 
         public void Move(Position position)

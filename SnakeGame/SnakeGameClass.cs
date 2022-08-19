@@ -13,9 +13,12 @@ namespace ConsoleSnake.SnakeGame
     class SnakeGameClass
     {
         public List<IMovable> Snake { get; set; }
+        public List<Types.Barrier> barriers;
         public Apple apple { get; set; }
-        public int UpdateSpeed = 50; //1000ms = 1s
+        public int UpdateSpeed = 100; //1000ms = 1s
         public DirectionEnum direction;
+
+        public bool active = true;
 
         public int applesEated = 0;
 
@@ -27,14 +30,19 @@ namespace ConsoleSnake.SnakeGame
         {
             while (true)
             {
-                //Console.Clear();
+                if (!active)
+                {
+                    EndGame();
+                    continue;
+                }
                 DrawBorders();
                 UpdateDirection();
                 DrawAndMoveSnake();
                 DrawOrCreateApple();
+                DrawOrCreateBarriers();
                 DrawInterface();
 
-                Thread.Sleep(UpdateSpeed);
+                Thread.Sleep(Convert.ToInt32(UpdateSpeed - (UpdateSpeed * (applesEated * 0.1))));
             }
         }
         public async void UpdateDirection()
@@ -70,20 +78,20 @@ namespace ConsoleSnake.SnakeGame
         public void DrawInterface()
         {
             Console.SetCursorPosition(WindowLimits.width / 2 - 10, WindowLimits.height + 5);
-            Console.Write($"Current direction: {direction}");
+            Console.Write($"Current direction: {direction}          ");
             Console.SetCursorPosition(WindowLimits.width / 2 - 10, WindowLimits.height + 6);
-            Console.Write($"Apples Eated: {applesEated}");
+            Console.Write($"Apples Eated: {applesEated}      ");
         }
         public void DrawAndMoveSnake()
         {
             Position position = null;
-            for (int i = Snake.Count-1; i >= 1; i--)
+            for (int i = Snake.Count - 1; i >= 1; i--)
             {
-                position = Snake[i-1].GetPosition();
+                position = Snake[i - 1].GetPosition();
                 ((SnakeTail)Snake[i]).position = new Position(position);
                 Console.SetCursorPosition(position.posX, position.posY);
                 Console.Write("\b");
-                Console.Write("0");
+                Console.Write(SnakeTail.name);
             }
             var movableSnakeHead = Snake[0];
             position = movableSnakeHead.GetPosition();
@@ -108,9 +116,9 @@ namespace ConsoleSnake.SnakeGame
             }
             Console.SetCursorPosition(position.posX, position.posY);
             Console.Write("\b");
-            Console.Write("1");
+            Console.Write(SnakeHead.name);
 
-            
+
         }
         public void DrawOrCreateApple()
         {
@@ -125,10 +133,69 @@ namespace ConsoleSnake.SnakeGame
             }
             Console.SetCursorPosition(apple.position.posX, apple.position.posY);
             Console.Write("\b");
-            Console.Write(2);
+            Console.Write(Apple.name);
+        }
+        public void DrawOrCreateBarriers()
+        {
+            if (barriers == null)
+            {
+                barriers = new List<Types.Barrier>();
+            }
+            int barriersCount = Types.Barrier.GetCount(applesEated);
+
+            if (barriers.Count != barriersCount)
+            {
+                barriers.Clear();
+                barriers.AddRange(Types.Barrier.GenerateBarriersWithRandomPosition(barriersCount));
+            }
+            for (int i = 0; i <= barriers.Count - 1; i++)
+            {
+                var barrier = barriers[i];
+                if (((SnakeHead)Snake[0]).IsIntersectedBarrier(barrier))
+                {
+                    active = false;
+                    return;
+                }
+            }
+            for (int i = 0; i <= barriers.Count - 1; i++)
+            {
+                Console.SetCursorPosition(barriers[i].position.posX, barriers[i].position.posY);
+                Console.Write("\b");
+                Console.Write(Types.Barrier.name);
+            }
 
         }
+        private void EndGame()
+        {
+            Console.Clear();
+            string message = "G a m e   O v e r!";
+            Console.SetCursorPosition(WindowLimits.width / 2 - (message.Length / 2), WindowLimits.height - 15);
+            Console.Write(message);
+            message = "You are dead!";
+            Console.SetCursorPosition(WindowLimits.width / 2 - (message.Length / 2), WindowLimits.height - 13);
+            Console.Write(message);
+            message = "Press y to restart the game";
+            Console.SetCursorPosition(WindowLimits.width / 2 - (message.Length/2), WindowLimits.height - 10);
+            Console.Write(message);
+            Console.SetCursorPosition(WindowLimits.width / 2, WindowLimits.height - 8);
+            char key = Console.ReadKey().KeyChar;
+            if (key == 'y')
+            {
+                active = true;
+                applesEated = 0;
 
+                Snake = new List<IMovable>();
+
+                SnakeHead snakeHead = new SnakeHead();
+                snakeHead.position = Position.GetRandomPosition(Console.WindowWidth, Console.WindowHeight - 1);
+                Snake.Add(snakeHead);
+
+                apple = Apple.CreateWithRandomPosition();
+
+                this.barriers.Clear();
+            }
+
+        }
         public SnakeGameClass()
         {
             Snake = new List<IMovable>();
