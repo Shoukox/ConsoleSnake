@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using ConsoleSnake.SnakeGame.Types;
+using SnakeGame_Console.SnakeGame.Enums;
 using SnakeGame_Console.SnakeGame.Interfaces;
 using SnakeGame_Console.SnakeGame.Types;
-using SnakeGame_Console.SnakeGame.Enums;
-using System.Threading;
-using System.Linq;
-using ConsoleSnake.SnakeGame.Types;
 
 namespace ConsoleSnake.SnakeGame
 {

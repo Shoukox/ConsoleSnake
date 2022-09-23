@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using SnakeGame_Console.SnakeGame.Enums;
+﻿using SnakeGame_Console.SnakeGame.Enums;
 using SnakeGame_Console.SnakeGame.Interfaces;
 
 namespace SnakeGame_Console.SnakeGame.Types

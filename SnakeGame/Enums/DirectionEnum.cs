@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace SnakeGame_Console.SnakeGame.Enums
+﻿namespace SnakeGame_Console.SnakeGame.Enums
 {
     enum DirectionEnum
     {

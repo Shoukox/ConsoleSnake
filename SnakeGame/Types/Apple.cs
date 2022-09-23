@@ -1,7 +1,4 @@
 ﻿using ConsoleSnake.SnakeGame.Types;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SnakeGame_Console.SnakeGame.Types
 {
@@ -13,7 +10,7 @@ namespace SnakeGame_Console.SnakeGame.Types
 
         public static Apple CreateWithRandomPosition()
         {
-            return new Apple { position = Position.GetRandomPosition(WindowLimits.width-1, WindowLimits.height - 1) };
+            return new Apple { position = Position.GetRandomPosition(WindowLimits.width - 1, WindowLimits.height - 1) };
         }
 
 

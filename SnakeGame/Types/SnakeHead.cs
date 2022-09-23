@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using ConsoleSnake.SnakeGame.Types;
+﻿using ConsoleSnake.SnakeGame.Types;
 using SnakeGame_Console.SnakeGame.Interfaces;
 
 namespace SnakeGame_Console.SnakeGame.Types
@@ -15,9 +12,9 @@ namespace SnakeGame_Console.SnakeGame.Types
         public bool IsIntersectedByTails(IEnumerable<SnakeTail> tails)
         {
             bool answer = false;
-            foreach(SnakeTail tail in tails)
+            foreach (SnakeTail tail in tails)
             {
-                if(tail.position == position)
+                if (tail.position == position)
                 {
                     answer = true;
                     break;
