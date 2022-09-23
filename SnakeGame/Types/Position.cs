@@ -17,8 +17,8 @@ namespace SnakeGame_Console.SnakeGame.Types
             Random rnd = new Random();
             return new Position()
             {
-                posX = rnd.Next(1, maxWidth),
-                posY = rnd.Next(1, maxHeight)
+                posX = rnd.Next(2, maxWidth),
+                posY = rnd.Next(2, maxHeight)
             };
         }
         public Position()

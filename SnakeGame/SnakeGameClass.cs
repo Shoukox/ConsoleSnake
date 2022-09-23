@@ -15,7 +15,7 @@ namespace ConsoleSnake.SnakeGame
         public List<IMovable> Snake { get; set; }
         public List<Types.Barrier> barriers;
         public Apple apple { get; set; }
-        public int UpdateSpeed = 100; //1000ms = 1s
+        public int UpdateSpeed = 50; //1000ms = 1s
         public DirectionEnum direction;
 
         public bool active = true;
@@ -33,16 +33,20 @@ namespace ConsoleSnake.SnakeGame
                 if (!active)
                 {
                     EndGame();
-                    continue;
                 }
-                DrawBorders();
-                UpdateDirection();
-                DrawAndMoveSnake();
-                DrawOrCreateApple();
-                DrawOrCreateBarriers();
-                DrawInterface();
+                else
+                {
 
-                Thread.Sleep(Convert.ToInt32(UpdateSpeed - (UpdateSpeed * (applesEated * 0.1))));
+                    DrawBorders();
+                    UpdateDirection();
+                    DrawAndMoveSnake();
+                    DrawOrCreateApple();
+                    DrawOrCreateBarriers();
+                    DrawInterface();
+                }
+
+                //Thread.Sleep(Convert.ToInt32(UpdateSpeed - (UpdateSpeed * (applesEated * 0.1))));
+                Thread.Sleep(UpdateSpeed);
             }
         }
         public async void UpdateDirection()
@@ -145,8 +149,7 @@ namespace ConsoleSnake.SnakeGame
 
             if (barriers.Count != barriersCount)
             {
-                barriers.Clear();
-                barriers.AddRange(Types.Barrier.GenerateBarriersWithRandomPosition(barriersCount));
+                barriers = (Types.Barrier.GenerateBarriersWithRandomPosition(barriersCount, barriers));
             }
             for (int i = 0; i <= barriers.Count - 1; i++)
             {
@@ -175,7 +178,7 @@ namespace ConsoleSnake.SnakeGame
             Console.SetCursorPosition(WindowLimits.width / 2 - (message.Length / 2), WindowLimits.height - 13);
             Console.Write(message);
             message = "Press y to restart the game";
-            Console.SetCursorPosition(WindowLimits.width / 2 - (message.Length/2), WindowLimits.height - 10);
+            Console.SetCursorPosition(WindowLimits.width / 2 - (message.Length / 2), WindowLimits.height - 10);
             Console.Write(message);
             Console.SetCursorPosition(WindowLimits.width / 2, WindowLimits.height - 8);
             char key = Console.ReadKey().KeyChar;
@@ -201,7 +204,7 @@ namespace ConsoleSnake.SnakeGame
             Snake = new List<IMovable>();
 
             SnakeHead snakeHead = new SnakeHead();
-            snakeHead.position = Position.GetRandomPosition(Console.WindowWidth, Console.WindowHeight - 1);
+            snakeHead.position = Position.GetRandomPosition(WindowLimits.width, WindowLimits.height);
             Snake.Add(snakeHead);
 
             apple = Apple.CreateWithRandomPosition();
