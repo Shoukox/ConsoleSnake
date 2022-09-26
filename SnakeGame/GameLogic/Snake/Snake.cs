@@ -3,15 +3,8 @@ using ConsoleSnake.SnakeGame.GameLogic.Interfaces;
 using ConsoleSnake.SnakeGame.GameLogic.Objects;
 using ConsoleSnake.SnakeGame.Interfaces;
 using ConsoleSnake.SnakeGame.Types;
-using SnakeGame_Console.SnakeGame.Enums;
 using SnakeGame_Console.SnakeGame.Interfaces;
 using SnakeGame_Console.SnakeGame.Types;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ConsoleSnake.SnakeGame.GameLogic.Snake
 {
@@ -78,7 +71,7 @@ namespace ConsoleSnake.SnakeGame.GameLogic.Snake
 
                 return apple;
             }
-            else if(collision is Objects.Barrier barrier)
+            else if (collision is Objects.Barrier barrier)
             {
                 return barrier;
             }
@@ -95,6 +88,7 @@ namespace ConsoleSnake.SnakeGame.GameLogic.Snake
             directionUpdater = new DirectionUpdater(snakeDirection);
             directionUpdater.Start();
 
+            //creating list with snake tiles and adding snakehead 
             snake = new List<IMovable>();
             SnakeHead snakeHead = new SnakeHead();
             snakeHead.position = Position.GetRandomPosition(WindowLimits.width, WindowLimits.height);

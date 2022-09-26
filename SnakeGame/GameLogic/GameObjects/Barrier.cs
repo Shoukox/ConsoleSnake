@@ -1,12 +1,8 @@
 ﻿using ConsoleSnake.SnakeGame.GameLogic.Interfaces;
-using ConsoleSnake.SnakeGame.GameLogic.Snake;
 using ConsoleSnake.SnakeGame.Interfaces;
 using ConsoleSnake.SnakeGame.Types;
 using SnakeGame_Console.SnakeGame.Interfaces;
 using SnakeGame_Console.SnakeGame.Types;
-using System.Threading;
-using System;
-using System.Xml.Linq;
 
 namespace ConsoleSnake.SnakeGame.GameLogic.Objects
 {

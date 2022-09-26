@@ -1,4 +1,4 @@
-﻿namespace SnakeGame_Console.SnakeGame.Enums
+﻿namespace ConsoleSnake.SnakeGame.GameLogic
 {
     enum DirectionEnum
     {

@@ -1,10 +1,6 @@
 ﻿using ConsoleSnake.SnakeGame.GameLogic.GameObjects;
 using ConsoleSnake.SnakeGame.GameLogic.Objects;
 using ConsoleSnake.SnakeGame.GameLogic.Snake;
-using ConsoleSnake.SnakeGame.Types;
-using SnakeGame_Console.SnakeGame.Enums;
-using SnakeGame_Console.SnakeGame.Interfaces;
-using SnakeGame_Console.SnakeGame.Types;
 
 namespace ConsoleSnake.SnakeGame
 {

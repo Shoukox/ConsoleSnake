@@ -1,6 +1,4 @@
-﻿using ConsoleSnake.SnakeGame.GameLogic.Interfaces;
-using ConsoleSnake.SnakeGame.Interfaces;
-using SnakeGame_Console.SnakeGame.Enums;
+﻿using ConsoleSnake.SnakeGame.Interfaces;
 using SnakeGame_Console.SnakeGame.Interfaces;
 using SnakeGame_Console.SnakeGame.Types;
 
