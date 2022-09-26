@@ -1,11 +1,15 @@
-﻿using ConsoleSnake.SnakeGame.Types;
+﻿using ConsoleSnake.SnakeGame.GameLogic.Interfaces;
+using ConsoleSnake.SnakeGame.GameLogic.Objects;
+using ConsoleSnake.SnakeGame.Interfaces;
+using ConsoleSnake.SnakeGame.Types;
 using SnakeGame_Console.SnakeGame.Interfaces;
+using SnakeGame_Console.SnakeGame.Types;
 
-namespace SnakeGame_Console.SnakeGame.Types
+namespace ConsoleSnake.SnakeGame.GameLogic.Snake
 {
-    class SnakeHead : IMovable
+    class SnakeHead : IMovable, IConsoleDrawable
     {
-        public static char name = '1';
+        public static char consoleSymbol = '1';
 
         public Position position { get; set; }
 
@@ -22,8 +26,6 @@ namespace SnakeGame_Console.SnakeGame.Types
             }
             return answer;
         }
-        public bool IsIntersectedApple(Apple apple) => position == apple.position;
-        public bool IsIntersectedBarrier(ConsoleSnake.SnakeGame.Types.Barrier barrier) => position == barrier.position;
 
         public void Move(Position position)
         {
@@ -40,5 +42,28 @@ namespace SnakeGame_Console.SnakeGame.Types
             this.position = position;
         }
         public Position GetPosition() => position;
+
+        public void SetPosition(Position position)
+        {
+            Move(position);
+        }
+        public void Move()
+        {
+            throw new NotImplementedException();
+        }
+
+        public char GetConsoleSymbol() => consoleSymbol;
+
+        public void DrawInConsole(params object[] objects)
+        {
+            Console.SetCursorPosition(position.posX, position.posY);
+            Console.Write("\b");
+            Console.Write(GetConsoleSymbol());
+            Console.SetCursorPosition(0, 0);
+        }
+        public SnakeHead()
+        {
+
+        }
     }
 }
